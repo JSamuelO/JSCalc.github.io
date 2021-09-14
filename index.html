@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSamuelO</title>
+</head>
+
+
+
+
+<style>
+    body {
+        background: #878787;
+    }
+    
+    #result {
+        color: #ffffff;
+        background-color: #333333;
+        width: 210px;
+        height: 40px;
+        outline-color: #333333;
+        font-family: 'Consolas';
+        font-size: 1.9em;
+        font-weight: bold;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    #operation {
+        color: #878787;
+        background-color: #333333;
+        width: 210px;
+        height: 70px;
+        outline-color: #333333;
+        font-family: 'Consolas';
+        font-size: 1.9em;
+        font-weight: bold;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    #calculator {
+        background-color: #333333;
+        width: 240px;
+        height: 490px;
+        border-radius: 0 0 20px 20px;
+        box-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    }
+    
+    #delete:link,
+    #delete:visited {
+        background-color: #333333;
+        border-radius: 100px;
+        color: white;
+        box-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+        color: white;
+        padding: 5px 25px;
+        margin-right: 5px;
+        margin-left: 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    #delete:hover,
+    #delete:active {
+        background-color: darkblue;
+    }
+    
+    #equalto {
+        background-color: #333333;
+        border-radius: 100px;
+        color: white;
+        box-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+        color: white;
+        padding: 8px 18px;
+        margin-right: 5px;
+        margin-left: 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    #equalto:hover,
+    #equalto:active {
+        background-color: darkblue;
+    }
+    
+    .operator:link,
+    .operator:visited {
+        background-color: #333333;
+        border-radius: 100px;
+        color: white;
+        box-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+        color: white;
+        padding: 10px 18px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .operator:hover,
+    .operator:active {
+        background-color: darkblue;
+    }
+    
+    a:link,
+    a:visited {
+        background-color: #333333;
+        border-radius: 100px;
+        color: white;
+        box-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+        color: white;
+        padding: 10px 16px;
+        margin-right: 5px;
+        margin-left: 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    a:hover,
+    a:active {
+        background-color: black;
+    }
+</style>
+
+<script>
+    var calc = '';
+</script>
+
+<body>
+    <div id="calculator" class="container"><br>
+
+        <div id="operation"></div>
+        <div id="result">0</div>
+        <hr>
+        <br>
+        <div class="row pl-3 p-2 pr-2" id="exchange">
+
+
+        </div>
+
+        <div class="row pl-3 p-2 pr-2">
+
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += 7 , exch() ,calc += 7" class="number" name="7">7</a>
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += 8 , exch() ,calc += 8" class="number" name="8">8</a>
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += 9 , exch() ,calc += 9" class="number" name="8">9</a>
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += '+' , exch() ,calc += '+'" class="operator" name="+">+</a>
+
+        </div>
+        <div class="pl-3 p-2 pr-2" style="display: none;">
+
+            <a href="#" onclick="sin()" class="operator" id="sin">sin</a>
+            <a href="#" onclick="cos()" class="operator" id="cos">cos</a>
+            <a href="#" onclick="tan()" class="operator" id="tan">tan</a>
+            <a href="#" onclick="document.getElementById('operation').innerHTML += '',calc += 'Math.PI'" class="operator" id="pi"></a>
+            <a href="#" onclick="calc += '** 2'" class="operator" id="square"></a>
+            <a href="#" onclick="calc += '** 1/2'" class="operator" id="square-root"></a>
+
+        </div>
+        <div class="row pl-3 p-2 pr-2">
+
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += 4 , exch() ,calc += 4" class="number" name="4">4</a>
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += 5 , exch() ,calc += 5" class="number" name="5">5</a>
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += 6 , exch() ,calc += 6" class="number" name="6">6</a>
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += '–', exch() , calc += '-'" class="operator" name="-">–</a>
+
+        </div>
+        <div class="row pl-3 p-2 pr-2">
+
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += 1 , exch() ,calc += 1" class="number" name="1">1</a>
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += 2 , exch() ,calc += 2" class="number" name="2">2</a>
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += 3 , exch() ,calc += 3" class="number" name="3">3</a>
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += '×', exch() , calc += '*'" class="operator" name="*">×</a>
+
+        </div>
+        <div class="row pl-3 p-2 pr-2">
+
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += 0 , exch() ,calc += 0" class="number" name="0">0</a>
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += '.' ,  exch() ,calc += '.'" class="number" name=".">.</a>
+            <a href="#" onclick="change(),calculate()" class="pr-3 pl-3 mr-2" id="equalto"> = </a>
+            <a href="#" onclick=" document.getElementById('operation').innerHTML += '÷' ,exch() , calc += '/'" class="operator" name="/">÷</a>
+
+        </div>
+    </div>
+
+    <!-- <a href="#" class="mylink">YES</a> -->
+    <script>
+        function change() {
+
+            var link = "<a href='#' id='delete' onclick=\" document.getElementById('operation').innerHTML = '',calc='',document.getElementById('result').innerHTML = 0\" > ";
+            link += "C"
+            link += "</a>";
+            document.getElementById("exchange").innerHTML = link;
+
+        }
+
+        function exch() {
+
+            var inputScreen = document.getElementById('operation').innerHTML
+            var link = "<a href='#' id='delete' onclick=\" document.getElementById('operation').innerHTML=document.getElementById('operation').innerHTML.slice(0,-1),calc=calc.slice(0,-1),document.getElementById('result').innerHTML = 0\" > ";
+            link += "⌫"
+            link += "</a>";
+            document.getElementById("exchange").innerHTML = link;
+
+
+        }
+
+        function calculate() {
+
+
+            try {
+
+                document.getElementById("result").innerHTML = eval(calc)
+
+            } catch (err) {
+                document.getElementById("result").innerHTML = "Error!"
+            }
+        }
+
+
+
+        // function autoclear() {
+        //     if (document.getElementById("result").innerHTML != 0) calc = "", document.getElementById("operation").innerHTML = (document.getElementById("operation").innerHTML).slice(0, 0)
+        // }
+    </script>
+
+
+
+</body>
+
+</html>
